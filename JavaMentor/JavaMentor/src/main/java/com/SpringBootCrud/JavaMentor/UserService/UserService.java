@@ -3,12 +3,15 @@ package com.SpringBootCrud.JavaMentor.UserService;
 import com.SpringBootCrud.JavaMentor.Repository.UserRepository;
 import com.SpringBootCrud.JavaMentor.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -22,7 +25,7 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return userRepository.findAll() ;
+        return userRepository.findAll();
     }
 
     public User saveUser(User user) {
@@ -33,6 +36,14 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
+    }
 }
 
 
