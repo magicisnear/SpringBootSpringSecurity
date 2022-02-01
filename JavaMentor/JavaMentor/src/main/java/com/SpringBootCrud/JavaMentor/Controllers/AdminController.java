@@ -28,20 +28,6 @@ public class AdminController {
         return "admin-list";
     }
 
-    @GetMapping("/user")
-    public String user(Model model) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        User user = (User) userService.loadUserByUsername(username);
-        model.addAttribute("user", user);
-        return "user";
-    }
-
     @GetMapping("/admin-create")
     public String createUserForm(User user) {
         return "admin-create";

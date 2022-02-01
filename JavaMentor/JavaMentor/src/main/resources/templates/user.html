@@ -5,30 +5,14 @@
     <title>User Page</title>
 </head>
 <body>
-<div th:switch="${user}">
-    <h2 th:case="null">No users found!</h2>
-    <div th:case="*">
-        <h2>User</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>name</th>
-                <th>password</th>
-            </tr>
-            </thead>
-            <tbody>
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.password}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<div>
+                <td th:text="${user.}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.password}"></td>
+   </div>
 
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" class="btn btn-primary"/>
+    <input type="submit" value="Logout" class="btn btn-primary" />
 </form>
 </body>
 </html>
