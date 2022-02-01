@@ -34,6 +34,17 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordConfirm='" + passwordConfirm + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
+
     public void setName(String name) {
         this.name = name;
     }
