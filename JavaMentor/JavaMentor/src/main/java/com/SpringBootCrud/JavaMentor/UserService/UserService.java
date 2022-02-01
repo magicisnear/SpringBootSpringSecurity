@@ -1,24 +1,27 @@
 package com.SpringBootCrud.JavaMentor.UserService;
 
 import com.SpringBootCrud.JavaMentor.Repository.UserRepository;
+import com.SpringBootCrud.JavaMentor.model.Role;
 import com.SpringBootCrud.JavaMentor.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public User findByID(Long id) {
         return userRepository.getById(id);
@@ -28,8 +31,15 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public User saveUser(User user) {
-        return userRepository.saveAndFlush(user);
+    public boolean saveUser(User user) {
+        User userFromDB = userRepository.findByName(user.getName());
+        if (userFromDB != null) {
+            return false;
+        }
+        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return true;
     }
 
     public void deleteById(Long id) {

@@ -12,6 +12,8 @@
     <input type="text" th:field="*{password}" id="password" placeholder="Password">
     <input type="submit" value="Create User">
 </form>
-
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" class="btn btn-primary" />
+</form>
 </body>
 </html>
