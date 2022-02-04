@@ -4,12 +4,10 @@ import com.SpringBootCrud.JavaMentor.repository.UserRepository;
 import com.SpringBootCrud.JavaMentor.model.Role;
 import com.SpringBootCrud.JavaMentor.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 

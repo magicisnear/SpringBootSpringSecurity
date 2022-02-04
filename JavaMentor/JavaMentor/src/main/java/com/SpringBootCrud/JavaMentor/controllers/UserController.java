@@ -12,8 +12,7 @@ public class UserController {
 
     @GetMapping("/user")
     public String user(@AuthenticationPrincipal User user, Model model) {
-        User user1 = user;
-        model.addAttribute("user", user1);
+        model.addAttribute("user", user);
         return "user";
     }
 }
