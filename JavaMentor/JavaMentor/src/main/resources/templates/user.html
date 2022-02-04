@@ -6,9 +6,21 @@
 </head>
 <body>
 <div>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>name</th>
+            <th>password</th>
+        </tr>
+        </thead>
+        <tbody>
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.password}"></td>
+                </tr>
+        </tbody>
+    </table>
    </div>
 
 <form th:action="@{/logout}" method="post">
@@ -16,3 +28,4 @@
 </form>
 </body>
 </html>
+
