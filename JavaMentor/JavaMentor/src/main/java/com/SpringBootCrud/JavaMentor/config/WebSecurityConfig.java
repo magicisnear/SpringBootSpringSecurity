@@ -1,6 +1,7 @@
 package com.SpringBootCrud.JavaMentor.config;
 
-import com.SpringBootCrud.JavaMentor.UserService.UserService;
+import com.SpringBootCrud.JavaMentor.secuirtyService.securityService;
+import com.SpringBootCrud.JavaMentor.userService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private securityService securityService;
 
     @Bean
     @Override
@@ -53,6 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(securityService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

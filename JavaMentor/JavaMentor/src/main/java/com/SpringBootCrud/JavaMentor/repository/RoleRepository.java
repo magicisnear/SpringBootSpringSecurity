@@ -1,4 +1,4 @@
-package com.SpringBootCrud.JavaMentor.Repository;
+package com.SpringBootCrud.JavaMentor.repository;
 
 import com.SpringBootCrud.JavaMentor.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

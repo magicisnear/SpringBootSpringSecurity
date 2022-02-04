@@ -1,17 +1,14 @@
-package com.SpringBootCrud.JavaMentor.Controllers;
+package com.SpringBootCrud.JavaMentor.controllers;
 
-import com.SpringBootCrud.JavaMentor.UserService.UserService;
+import com.SpringBootCrud.JavaMentor.repository.UserRepository;
+import com.SpringBootCrud.JavaMentor.userService.UserService;
 import com.SpringBootCrud.JavaMentor.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -19,7 +16,10 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    UserService userService;
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/admin")
     public String findAll(Model model) {
@@ -35,8 +35,11 @@ public class AdminController {
 
     @PostMapping("/admin-create")
     public String createUser(User user) {
-        userService.saveUser(user);
-        return "redirect:/admin";
+        User userFromDB = userRepository.findByName(user.getName());
+        if (userFromDB == null) {
+            userService.saveUser(user);
+        }
+       return "redirect:/admin";
     }
 
     @GetMapping("/admin-delete/{id}")
