@@ -44,15 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user").fullyAuthenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/admin-update").hasRole("ADMIN")
-                .antMatchers("/admin-create").hasRole("ADMIN")
                 .and()
                 .formLogin().successHandler(successHandler)
                 .loginPage("/login")
                 .usernameParameter("name")
                 .and().logout().permitAll()
                 .logoutSuccessUrl("/login");
-        ;
     }
 
     @Autowired

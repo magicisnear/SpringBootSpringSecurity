@@ -28,12 +28,12 @@ public class AdminController {
         return "admin-list";
     }
 
-    @GetMapping("/admin-create")
+    @GetMapping("/admin/create")
     public String createUserForm(User user) {
         return "admin-create";
     }
 
-    @PostMapping("/admin-create")
+    @PostMapping("/admin/create")
     public String createUser(User user) {
         User userFromDB = userRepository.findByName(user.getName());
         if (userFromDB == null) {
@@ -42,20 +42,20 @@ public class AdminController {
        return "redirect:/admin";
     }
 
-    @GetMapping("/admin-delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin-update/{id}")
+    @GetMapping("/admin/update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.findByID(id);
         model.addAttribute("user", user);
         return "admin-update";
     }
 
-    @PostMapping("/admin-update")
+    @PostMapping("/admin/update")
     public String updateUser(User user) {
         userService.saveUser(user);
         return "redirect:/admin";
