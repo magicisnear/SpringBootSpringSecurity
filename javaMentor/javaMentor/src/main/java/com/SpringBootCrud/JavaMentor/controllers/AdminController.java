@@ -15,12 +15,12 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-
+    @Autowired
     private UserService userService;
 
     @GetMapping("/admin")
     public String findAll(Model model) {
-        List<User> users = userService.findAll();
+        List<User> users = userService.getAllUsersAndFetchRoles();
         model.addAttribute("users", users);
         return "admin-list";
     }

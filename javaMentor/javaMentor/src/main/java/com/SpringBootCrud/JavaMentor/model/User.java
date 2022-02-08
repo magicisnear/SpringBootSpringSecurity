@@ -18,6 +18,7 @@ public class User implements UserDetails {
     private String name;
     @Column(name = "password")
     private String password;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Role> roles;
 
