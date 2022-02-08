@@ -1,7 +1,7 @@
-package com.SpringBootCrud.JavaMentor.config;
+package com.SpringBootCrud.JavaMentor.security;
 
-import com.SpringBootCrud.JavaMentor.secuirtyService.securityService;
-import com.SpringBootCrud.JavaMentor.userService.UserService;
+import com.SpringBootCrud.JavaMentor.config.SimpleAuthenticationSuccessHandler;
+import com.SpringBootCrud.JavaMentor.security.service.securityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private securityService securityService;

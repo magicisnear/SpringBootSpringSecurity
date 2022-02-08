@@ -2,6 +2,7 @@ package com.SpringBootCrud.JavaMentor.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -17,7 +18,7 @@ public class User implements UserDetails {
     private String name;
     @Column(name = "password")
     private String password;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Role> roles;
 
     public User() {
@@ -61,9 +62,11 @@ public class User implements UserDetails {
     }
 
     @Override
+    @Transactional
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
+
 
     @Override
     public String getPassword() {

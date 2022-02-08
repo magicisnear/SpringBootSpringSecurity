@@ -1,7 +1,7 @@
 package com.SpringBootCrud.JavaMentor.controllers;
 
 import com.SpringBootCrud.JavaMentor.repository.UserRepository;
-import com.SpringBootCrud.JavaMentor.userService.UserService;
+import com.SpringBootCrud.JavaMentor.service.UserService;
 import com.SpringBootCrud.JavaMentor.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +15,7 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
     private UserService userService;
 
     @GetMapping("/admin")
@@ -35,7 +32,7 @@ public class AdminController {
 
     @PostMapping("/admin/create")
     public String createUser(User user) {
-        User userFromDB = userRepository.findByName(user.getName());
+        User userFromDB = userService.findByName(user.getName());
         if (userFromDB == null) {
             userService.saveUser(user);
         }
