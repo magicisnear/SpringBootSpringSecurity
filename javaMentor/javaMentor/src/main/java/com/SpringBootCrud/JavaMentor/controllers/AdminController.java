@@ -15,8 +15,8 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-    @Autowired
-    private UserService userService;
+     @Autowired
+     UserService userService;
 
     @GetMapping("/admin")
     public String findAll(Model model) {
