@@ -35,8 +35,8 @@ public class AdminController {
     @PostMapping("/admin/create")
     public String createUser(User user, Model model) throws ThisNameAlreadyExistsException {
         if (userService.getAllUsersAndFetchRoles()
-                .contains(userService.findByName(user.getName()))) {
-            throw new ThisNameAlreadyExistsException("Пользователь с таким именем уже существует");
+                .contains((userService.findByName(user.getName())))) {
+            throw new ThisNameAlreadyExistsException();
         } else {
             userService.saveUser(user);
             return "redirect:/admin";
