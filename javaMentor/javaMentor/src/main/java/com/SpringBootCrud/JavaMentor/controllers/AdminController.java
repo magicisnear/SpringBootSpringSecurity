@@ -1,5 +1,6 @@
 package com.SpringBootCrud.JavaMentor.controllers;
 
+import com.SpringBootCrud.JavaMentor.Exceptions.ThisNameAlreadyExistsException;
 import com.SpringBootCrud.JavaMentor.repository.UserRepository;
 import com.SpringBootCrud.JavaMentor.service.UserService;
 import com.SpringBootCrud.JavaMentor.model.User;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AdminController {
 
-     @Autowired
-     UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/admin")
     public String findAll(Model model) {
@@ -31,12 +33,14 @@ public class AdminController {
     }
 
     @PostMapping("/admin/create")
-    public String createUser(User user) {
-        User userFromDB = userService.findByName(user.getName());
-        if (userFromDB == null) {
+    public String createUser(User user, Model model) throws ThisNameAlreadyExistsException {
+        if (userService.getAllUsersAndFetchRoles()
+                .contains(userService.findByName(user.getName()))) {
+            throw new ThisNameAlreadyExistsException("Пользователь с таким именем уже существует");
+        } else {
             userService.saveUser(user);
+            return "redirect:/admin";
         }
-       return "redirect:/admin";
     }
 
     @GetMapping("/admin/delete/{id}")

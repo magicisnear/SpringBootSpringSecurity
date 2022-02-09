@@ -1,6 +1,5 @@
 package com.SpringBootCrud.JavaMentor.security;
 
-import com.SpringBootCrud.JavaMentor.config.SimpleAuthenticationSuccessHandler;
 import com.SpringBootCrud.JavaMentor.security.service.securityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

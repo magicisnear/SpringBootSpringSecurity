@@ -10,7 +10,6 @@ public interface UserService {
     public List<User> getAllUsersAndFetchRoles();
     public User saveUser(User user);
     public User findByName(String name);
-    public List<Role> listRoles();
     public void deleteById(Long id);
 
 }

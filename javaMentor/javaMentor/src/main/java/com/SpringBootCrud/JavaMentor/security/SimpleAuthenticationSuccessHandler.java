@@ -1,4 +1,4 @@
-package com.SpringBootCrud.JavaMentor.config;
+package com.SpringBootCrud.JavaMentor.security;
 
 import java.io.IOException;
 import java.util.Set;
