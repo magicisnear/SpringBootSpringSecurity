@@ -33,15 +33,15 @@ public class AdminController {
     }
 
     @PostMapping("/admin/create")
-    public String createUser(User user, Model model) throws ThisNameAlreadyExistsException {
+    public String createUser(User user) throws ThisNameAlreadyExistsException {
         if (userService.getAllUsersAndFetchRoles()
                 .contains((userService.findByName(user.getName())))) {
             throw new ThisNameAlreadyExistsException();
-        } else {
-            userService.saveUser(user);
-            return "redirect:/admin";
         }
-    }
+        userService.saveUser(user);
+        return "redirect:/admin";
+   }
+
 
     @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
